@@ -1,0 +1,36 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "reservadecanchas",
+    "buildTool": "maven",
+    "cacheProvider": "no",
+    "clientFramework": "angular",
+    "clientTheme": "none",
+    "creationTimestamp": 1792460589761,
+    "databaseType": "sql",
+    "defaultCommand": "app",
+    "devDatabaseType": "h2Disk",
+    "enableHibernateCache": null,
+    "enableTranslation": true,
+    "entities": [],
+    "feignClient": null,
+    "jhipsterVersion": "9.4.0",
+    "jwtSecretKey": "MjQzM2Q0NDAyYzAxZjFhZDFkODFhNzM3NmY5Zjk2YWM4MjQ1OGExZGY5YWZlMDZmMGJlY2Y4OGNjZDRlMGZiMWM1ZTc0OTNhMTFiNDgzMzA1NGZhZGRiODg2YzcwNDQ3ODgzOTg1MzliYzI5ZGMyODIzNDgyZWVmZmQzMTFhZWU=",
+    "languages": ["es"],
+    "microfrontend": null,
+    "microfrontends": [],
+    "nativeLanguage": "es",
+    "packageName": "com.mycompany.myapp",
+    "prodDatabaseType": "oracle",
+    "promptValues": {
+      "nativeLanguage": "es"
+    },
+    "reactive": false,
+    "serverPort": null,
+    "serviceDiscoveryType": null,
+    "syncUserWithIdp": null,
+    "testFrameworks": [],
+    "withAdminUi": true
+  }
+}
