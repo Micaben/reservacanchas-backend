@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20261103005024"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "EstadoGeneral",
+      "fieldValues": "ACTIVO,INACTIVO,EN_USO"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Deporte",
+  "relationships": [
+    {
+      "otherEntityName": "cancha",
+      "otherEntityRelationshipName": "deporte",
+      "relationshipName": "cancha",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

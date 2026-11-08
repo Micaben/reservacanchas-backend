@@ -1,0 +1,34 @@
+{
+  "reservadecanchasApp": {
+    "pago": {
+      "home": {
+        "title": "Pagos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Pago",
+        "createOrEditLabel": "Crear o editar Pago",
+        "notFound": "Ningún Pagos encontrado"
+      },
+      "created": "Un nuevo Pago ha sido creado con el identificador {{ param }}",
+      "updated": "Un Pago ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Pago ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Pago {{ id }}?"
+      },
+      "detail": {
+        "title": "Pago"
+      },
+      "id": "ID",
+      "monto": "Monto",
+      "fechaPago": "Fecha Pago",
+      "metodoPago": "Metodo Pago",
+      "numOperacion": "Num Operacion",
+      "comprobanteUrl": "Comprobante Url",
+      "estadoPago": "Estado Pago",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "reserva": "Reserva"
+    }
+  }
+}

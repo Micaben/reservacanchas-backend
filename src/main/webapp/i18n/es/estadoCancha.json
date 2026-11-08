@@ -1,0 +1,10 @@
+{
+  "reservadecanchasApp": {
+    "EstadoCancha": {
+      "null": "",
+      "DISPONIBLE": "DISPONIBLE",
+      "MANTENIMIENTO": "MANTENIMIENTO",
+      "INACTIVA": "INACTIVA"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (cliente(); as clienteRef) {
+      <div>
+        <h2 data-cy="clienteDetailsHeading"><span jhiTranslate="reservadecanchasApp.cliente.detail.title">Cliente</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ clienteRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.nombres">Nombres</span></dt>
+          <dd>
+            <span>{{ clienteRef.nombres }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.apellidos">Apellidos</span></dt>
+          <dd>
+            <span>{{ clienteRef.apellidos }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.dni">Dni</span></dt>
+          <dd>
+            <span>{{ clienteRef.dni }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.email">Email</span></dt>
+          <dd>
+            <span>{{ clienteRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.telefono">Telefono</span></dt>
+          <dd>
+            <span>{{ clienteRef.telefono }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.valoracion">Valoracion</span></dt>
+          <dd>
+            <span>{{ clienteRef.valoracion }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.preferencia">Preferencia</span></dt>
+          <dd>
+            <span>{{ clienteRef.preferencia }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ clienteRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ clienteRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ clienteRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ clienteRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="button" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/cliente', clienteRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,189 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pago-heading" data-cy="PagoCreateUpdateHeading" jhiTranslate="reservadecanchasApp.pago.home.createOrEditLabel">
+        Crear o editar Pago
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let montoRef = editForm.get('monto')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_monto" jhiTranslate="reservadecanchasApp.pago.monto">Monto</label>
+          <input type="number" class="form-control" name="monto" id="field_monto" data-cy="monto" formControlName="monto" />
+          @if (montoRef.invalid && (montoRef.dirty || montoRef.touched)) {
+            <div>
+              @if (montoRef.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!montoRef.errors?.number" jhiTranslate="entity.validation.number"
+                >Este campo debe ser un número.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fechaPago" jhiTranslate="reservadecanchasApp.pago.fechaPago">Fecha Pago</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaPago"
+              data-cy="fechaPago"
+              type="datetime-local"
+              class="form-control"
+              name="fechaPago"
+              formControlName="fechaPago"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        @let metodoPagoRef = editForm.get('metodoPago')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_metodoPago" jhiTranslate="reservadecanchasApp.pago.metodoPago">Metodo Pago</label>
+          <select class="form-select" name="metodoPago" formControlName="metodoPago" id="field_metodoPago" data-cy="metodoPago">
+            <option [ngValue]="null">{{ 'reservadecanchasApp.MetodoPago.null' | translate }}</option>
+            @for (metodoPago of metodoPagoValues; track $index) {
+              <option [value]="metodoPago">{{ 'reservadecanchasApp.MetodoPago.' + metodoPago | translate }}</option>
+            }
+          </select>
+          @if (metodoPagoRef.invalid && (metodoPagoRef.dirty || metodoPagoRef.touched)) {
+            <div>
+              @if (metodoPagoRef.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numOperacion" jhiTranslate="reservadecanchasApp.pago.numOperacion">Num Operacion</label>
+          <input
+            type="text"
+            class="form-control"
+            name="numOperacion"
+            id="field_numOperacion"
+            data-cy="numOperacion"
+            formControlName="numOperacion"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_comprobanteUrl" jhiTranslate="reservadecanchasApp.pago.comprobanteUrl"
+            >Comprobante Url</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="comprobanteUrl"
+            id="field_comprobanteUrl"
+            data-cy="comprobanteUrl"
+            formControlName="comprobanteUrl"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_estadoPago" jhiTranslate="reservadecanchasApp.pago.estadoPago">Estado Pago</label>
+          <select class="form-select" name="estadoPago" formControlName="estadoPago" id="field_estadoPago" data-cy="estadoPago">
+            <option [ngValue]="null">{{ 'reservadecanchasApp.EstadoPago.null' | translate }}</option>
+            @for (estadoPago of estadoPagoValues; track $index) {
+              <option [value]="estadoPago">{{ 'reservadecanchasApp.EstadoPago.' + estadoPago | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="reservadecanchasApp.pago.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="reservadecanchasApp.pago.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy" jhiTranslate="reservadecanchasApp.pago.lastModifiedBy"
+            >Last Modified By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedDate" jhiTranslate="reservadecanchasApp.pago.lastModifiedDate"
+            >Last Modified Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_reserva" jhiTranslate="reservadecanchasApp.pago.reserva">Reserva</label>
+          <select
+            class="form-select"
+            id="field_reserva"
+            data-cy="reserva"
+            name="reserva"
+            formControlName="reserva"
+            [compareWith]="compareReserva"
+          >
+            <option [ngValue]="null"></option>
+            @for (reservaOption of reservasCollection(); track $index) {
+              <option [ngValue]="reservaOption">{{ reservaOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

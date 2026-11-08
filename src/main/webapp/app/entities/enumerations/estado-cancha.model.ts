@@ -1,0 +1,7 @@
+export enum EstadoCancha {
+  DISPONIBLE = 'DISPONIBLE',
+
+  MANTENIMIENTO = 'MANTENIMIENTO',
+
+  INACTIVA = 'INACTIVA',
+}

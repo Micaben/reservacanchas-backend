@@ -1,0 +1,167 @@
+<div>
+  <h2 id="page-heading" data-cy="CanchaHeading">
+    <span jhiTranslate="reservadecanchasApp.cancha.home.title">Canchas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="reservadecanchasApp.cancha.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-cancha"
+        [routerLink]="['/cancha/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="reservadecanchasApp.cancha.home.createLabel">Crear nuevo Cancha</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (canchas().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="reservadecanchasApp.cancha.home.notFound">Ningún Canchas encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="codigo">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.codigo">Codigo</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nombre">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.nombre">Nombre</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="descripcion">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.descripcion">Descripcion</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="precioHora">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.precioHora">Precio Hora</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="capacidad">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.capacidad">Capacidad</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="imagenUrl">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.imagenUrl">Imagen Url</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="estado">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.estado">Estado</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.createdBy">Created By</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.createdDate">Created Date</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.lastModifiedBy">Last Modified By</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.lastModifiedDate">Last Modified Date</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cancha.deporte">Deporte</span>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cancha of canchas(); track trackId(cancha)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/cancha', cancha.id, 'view']">{{ cancha.id }}</a>
+              </td>
+              <td>{{ cancha.codigo }}</td>
+              <td>{{ cancha.nombre }}</td>
+              <td>{{ cancha.descripcion }}</td>
+              <td>{{ cancha.precioHora }}</td>
+              <td>{{ cancha.capacidad }}</td>
+              <td>{{ cancha.imagenUrl }}</td>
+              <td [jhiTranslate]="'reservadecanchasApp.EstadoCancha.' + (cancha.estado ?? 'null')">
+                {{ { null: '', DISPONIBLE: 'DISPONIBLE', MANTENIMIENTO: 'MANTENIMIENTO', INACTIVA: 'INACTIVA' }[cancha.estado ?? 'null'] }}
+              </td>
+              <td>{{ cancha.createdBy }}</td>
+              <td>{{ cancha.createdDate | formatMediumDatetime }}</td>
+              <td>{{ cancha.lastModifiedBy }}</td>
+              <td>{{ cancha.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>
+                @for (deporte of cancha.deportes; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/deporte', deporte.id, 'view']">{{ deporte.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/cancha', cancha.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a [routerLink]="['/cancha', cancha.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="button" (click)="delete(cancha)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

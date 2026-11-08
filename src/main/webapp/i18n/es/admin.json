@@ -1,0 +1,33 @@
+{
+  "reservadecanchasApp": {
+    "admin": {
+      "home": {
+        "title": "Admins",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Admin",
+        "createOrEditLabel": "Crear o editar Admin",
+        "notFound": "Ningún Admins encontrado"
+      },
+      "created": "Un nuevo Admin ha sido creado con el identificador {{ param }}",
+      "updated": "Un Admin ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Admin ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Admin {{ id }}?"
+      },
+      "detail": {
+        "title": "Admin"
+      },
+      "id": "ID",
+      "nombres": "Nombres",
+      "apellidos": "Apellidos",
+      "dni": "Dni",
+      "email": "Email",
+      "telefono": "Telefono",
+      "nivelAcceso": "Nivel Acceso",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

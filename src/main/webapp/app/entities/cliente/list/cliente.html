@@ -1,0 +1,152 @@
+<div>
+  <h2 id="page-heading" data-cy="ClienteHeading">
+    <span jhiTranslate="reservadecanchasApp.cliente.home.title">Clientes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="reservadecanchasApp.cliente.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-cliente"
+        [routerLink]="['/cliente/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="reservadecanchasApp.cliente.home.createLabel">Crear nuevo Cliente</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (clientes().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="reservadecanchasApp.cliente.home.notFound">Ningún Clientes encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nombres">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.nombres">Nombres</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="apellidos">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.apellidos">Apellidos</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dni">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.dni">Dni</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.email">Email</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telefono">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.telefono">Telefono</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="valoracion">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.valoracion">Valoracion</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="preferencia">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.preferencia">Preferencia</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.createdBy">Created By</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.createdDate">Created Date</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.lastModifiedBy">Last Modified By</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.lastModifiedDate">Last Modified Date</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cliente of clientes(); track trackId(cliente)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/cliente', cliente.id, 'view']">{{ cliente.id }}</a>
+              </td>
+              <td>{{ cliente.nombres }}</td>
+              <td>{{ cliente.apellidos }}</td>
+              <td>{{ cliente.dni }}</td>
+              <td>{{ cliente.email }}</td>
+              <td>{{ cliente.telefono }}</td>
+              <td>{{ cliente.valoracion }}</td>
+              <td>{{ cliente.preferencia }}</td>
+              <td>{{ cliente.createdBy }}</td>
+              <td>{{ cliente.createdDate | formatMediumDatetime }}</td>
+              <td>{{ cliente.lastModifiedBy }}</td>
+              <td>{{ cliente.lastModifiedDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/cliente', cliente.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a [routerLink]="['/cliente', cliente.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="button" (click)="delete(cliente)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,35 @@
+{
+  "reservadecanchasApp": {
+    "cancha": {
+      "home": {
+        "title": "Canchas",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Cancha",
+        "createOrEditLabel": "Crear o editar Cancha",
+        "notFound": "Ningún Canchas encontrado"
+      },
+      "created": "Un nuevo Cancha ha sido creado con el identificador {{ param }}",
+      "updated": "Un Cancha ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Cancha ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cancha {{ id }}?"
+      },
+      "detail": {
+        "title": "Cancha"
+      },
+      "id": "ID",
+      "codigo": "Codigo",
+      "nombre": "Nombre",
+      "descripcion": "Descripcion",
+      "precioHora": "Precio Hora",
+      "capacidad": "Capacidad",
+      "imagenUrl": "Imagen Url",
+      "estado": "Estado",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "deporte": "Deporte"
+    }
+  }
+}

@@ -1,0 +1,253 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-reserva-heading" data-cy="ReservaCreateUpdateHeading" jhiTranslate="reservadecanchasApp.reserva.home.createOrEditLabel">
+        Crear o editar Reserva
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let codigoReservaRef = editForm.get('codigoReserva')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_codigoReserva" jhiTranslate="reservadecanchasApp.reserva.codigoReserva"
+            >Codigo Reserva</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="codigoReserva"
+            id="field_codigoReserva"
+            data-cy="codigoReserva"
+            formControlName="codigoReserva"
+          />
+          @if (codigoReservaRef.invalid && (codigoReservaRef.dirty || codigoReservaRef.touched)) {
+            <div>
+              @if (codigoReservaRef.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let fechaRef = editForm.get('fecha')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fecha" jhiTranslate="reservadecanchasApp.reserva.fecha">Fecha</label>
+          <div class="input-group">
+            <input
+              id="field_fecha"
+              data-cy="fecha"
+              type="text"
+              class="form-control"
+              name="fecha"
+              ngbDatepicker
+              #fechaDp="ngbDatepicker"
+              formControlName="fecha"
+            />
+            <button type="button" class="btn btn-secondary" (click)="fechaDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+          @if (fechaRef.invalid && (fechaRef.dirty || fechaRef.touched)) {
+            <div>
+              @if (fechaRef.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let horaInicioRef = editForm.get('horaInicio')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_horaInicio" jhiTranslate="reservadecanchasApp.reserva.horaInicio">Hora Inicio</label>
+          <input
+            type="text"
+            class="form-control"
+            name="horaInicio"
+            id="field_horaInicio"
+            data-cy="horaInicio"
+            formControlName="horaInicio"
+          />
+          @if (horaInicioRef.invalid && (horaInicioRef.dirty || horaInicioRef.touched)) {
+            <div>
+              @if (horaInicioRef.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let horaFinRef = editForm.get('horaFin')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_horaFin" jhiTranslate="reservadecanchasApp.reserva.horaFin">Hora Fin</label>
+          <input type="text" class="form-control" name="horaFin" id="field_horaFin" data-cy="horaFin" formControlName="horaFin" />
+          @if (horaFinRef.invalid && (horaFinRef.dirty || horaFinRef.touched)) {
+            <div>
+              @if (horaFinRef.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let precioTotalRef = editForm.get('precioTotal')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_precioTotal" jhiTranslate="reservadecanchasApp.reserva.precioTotal">Precio Total</label>
+          <input
+            type="number"
+            class="form-control"
+            name="precioTotal"
+            id="field_precioTotal"
+            data-cy="precioTotal"
+            formControlName="precioTotal"
+          />
+          @if (precioTotalRef.invalid && (precioTotalRef.dirty || precioTotalRef.touched)) {
+            <div>
+              @if (precioTotalRef.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!precioTotalRef.errors?.number" jhiTranslate="entity.validation.number"
+                >Este campo debe ser un número.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_estadoReserva" jhiTranslate="reservadecanchasApp.reserva.estadoReserva"
+            >Estado Reserva</label
+          >
+          <select class="form-select" name="estadoReserva" formControlName="estadoReserva" id="field_estadoReserva" data-cy="estadoReserva">
+            <option [ngValue]="null">{{ 'reservadecanchasApp.EstadoReserva.null' | translate }}</option>
+            @for (estadoReserva of estadoReservaValues; track $index) {
+              <option [value]="estadoReserva">{{ 'reservadecanchasApp.EstadoReserva.' + estadoReserva | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fechaCreacion" jhiTranslate="reservadecanchasApp.reserva.fechaCreacion"
+            >Fecha Creacion</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_fechaCreacion"
+              data-cy="fechaCreacion"
+              type="datetime-local"
+              class="form-control"
+              name="fechaCreacion"
+              formControlName="fechaCreacion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="reservadecanchasApp.reserva.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="reservadecanchasApp.reserva.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy" jhiTranslate="reservadecanchasApp.reserva.lastModifiedBy"
+            >Last Modified By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedDate" jhiTranslate="reservadecanchasApp.reserva.lastModifiedDate"
+            >Last Modified Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cliente" jhiTranslate="reservadecanchasApp.reserva.cliente">Cliente</label>
+          <select
+            class="form-select"
+            id="field_cliente"
+            data-cy="cliente"
+            name="cliente"
+            formControlName="cliente"
+            [compareWith]="compareCliente"
+          >
+            <option [ngValue]="null"></option>
+            @for (clienteOption of clientesSharedCollection(); track $index) {
+              <option [ngValue]="clienteOption">{{ clienteOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cancha" jhiTranslate="reservadecanchasApp.reserva.cancha">Cancha</label>
+          <select
+            class="form-select"
+            id="field_cancha"
+            data-cy="cancha"
+            name="cancha"
+            formControlName="cancha"
+            [compareWith]="compareCancha"
+          >
+            <option [ngValue]="null"></option>
+            @for (canchaOption of canchasSharedCollection(); track $index) {
+              <option [ngValue]="canchaOption">{{ canchaOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

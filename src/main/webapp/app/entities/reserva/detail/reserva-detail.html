@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reserva(); as reservaRef) {
+      <div>
+        <h2 data-cy="reservaDetailsHeading"><span jhiTranslate="reservadecanchasApp.reserva.detail.title">Reserva</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ reservaRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.codigoReserva">Codigo Reserva</span></dt>
+          <dd>
+            <span>{{ reservaRef.codigoReserva }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.fecha">Fecha</span></dt>
+          <dd>
+            <span>{{ reservaRef.fecha | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.horaInicio">Hora Inicio</span></dt>
+          <dd>
+            <span>{{ reservaRef.horaInicio }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.horaFin">Hora Fin</span></dt>
+          <dd>
+            <span>{{ reservaRef.horaFin }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.precioTotal">Precio Total</span></dt>
+          <dd>
+            <span>{{ reservaRef.precioTotal }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.estadoReserva">Estado Reserva</span></dt>
+          <dd>
+            <span [jhiTranslate]="'reservadecanchasApp.EstadoReserva.' + (reservaRef.estadoReserva ?? 'null')">{{
+              { null: '', PENDIENTE: 'PENDIENTE', CONFIRMADA: 'CONFIRMADA', CANCELADA: 'CANCELADA', FINALIZADA: 'FINALIZADA' }[
+                reservaRef.estadoReserva ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.fechaCreacion">Fecha Creacion</span></dt>
+          <dd>
+            <span>{{ reservaRef.fechaCreacion | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ reservaRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ reservaRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ reservaRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ reservaRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.cliente">Cliente</span></dt>
+          <dd>
+            @if (reserva()!.cliente) {
+              <div>
+                <a [routerLink]="['/cliente', reserva()!.cliente?.id, 'view']">{{ reservaRef.cliente?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.reserva.cancha">Cancha</span></dt>
+          <dd>
+            @if (reserva()!.cancha) {
+              <div>
+                <a [routerLink]="['/cancha', reserva()!.cancha?.id, 'view']">{{ reservaRef.cancha?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="button" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/reserva', reservaRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

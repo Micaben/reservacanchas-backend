@@ -1,0 +1,87 @@
+entity Cliente {
+  nombres String required,
+  apellidos String required,
+  dni String required unique,
+  email String required unique,
+  telefono String,
+  valoracion Integer,
+  preferencia String,
+  createdBy String,
+  createdDate Instant,
+  lastModifiedBy String,
+  lastModifiedDate Instant
+}
+
+entity Deporte {
+  nombre String required,
+  descripcion String,
+  estado EstadoGeneral,
+  createdBy String,
+  createdDate Instant,
+  lastModifiedBy String,
+  lastModifiedDate Instant
+}
+
+entity Cancha {
+  codigo String required unique,
+  nombre String required,
+  descripcion String,
+  precioHora BigDecimal required,
+  capacidad Integer required,
+  imagenUrl String,
+  estado EstadoCancha,
+  createdBy String,
+  createdDate Instant,
+  lastModifiedBy String,
+  lastModifiedDate Instant
+}
+
+entity Reserva {
+  codigoReserva String required unique,
+  fecha LocalDate required,
+  horaInicio String required,
+  horaFin String required,
+  precioTotal BigDecimal required,
+  estadoReserva EstadoReserva,
+  fechaCreacion Instant,
+  createdBy String,
+  createdDate Instant,
+  lastModifiedBy String,
+  lastModifiedDate Instant
+}
+
+entity Pago {
+  monto BigDecimal required,
+  fechaPago Instant,
+  metodoPago MetodoPago required,
+  numOperacion String,
+  comprobanteUrl String,
+  estadoPago EstadoPago,
+  createdBy String,
+  createdDate Instant,
+  lastModifiedBy String,
+  lastModifiedDate Instant
+}
+
+enum EstadoGeneral { ACTIVO, INACTIVO, EN_USO }
+
+enum EstadoCancha { DISPONIBLE, MANTENIMIENTO, INACTIVA }
+
+enum EstadoReserva { PENDIENTE, CONFIRMADA, CANCELADA, FINALIZADA }
+
+enum MetodoPago { EFECTIVO, TRANSFERENCIA, BILLETERA_DIGITAL, TARJETA_CREDITO_VISA }
+
+enum EstadoPago { PENDIENTE, PAGADO, RECHAZADO, REEMBOLSADO }
+
+relationship OneToOne {
+  Pago{reserva} to Reserva
+}
+
+relationship ManyToMany {
+  Cancha{deporte} to Deporte{cancha}
+}
+
+relationship ManyToOne {
+  Reserva{cliente} to Cliente,
+  Reserva{cancha} to Cancha
+}

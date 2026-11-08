@@ -1,0 +1,31 @@
+{
+  "reservadecanchasApp": {
+    "deporte": {
+      "home": {
+        "title": "Deportes",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Deporte",
+        "createOrEditLabel": "Crear o editar Deporte",
+        "notFound": "Ningún Deportes encontrado"
+      },
+      "created": "Un nuevo Deporte ha sido creado con el identificador {{ param }}",
+      "updated": "Un Deporte ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Deporte ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Deporte {{ id }}?"
+      },
+      "detail": {
+        "title": "Deporte"
+      },
+      "id": "ID",
+      "nombre": "Nombre",
+      "descripcion": "Descripcion",
+      "estado": "Estado",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "cancha": "Cancha"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (pago(); as pagoRef) {
+      <div>
+        <h2 data-cy="pagoDetailsHeading"><span jhiTranslate="reservadecanchasApp.pago.detail.title">Pago</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ pagoRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.monto">Monto</span></dt>
+          <dd>
+            <span>{{ pagoRef.monto }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.fechaPago">Fecha Pago</span></dt>
+          <dd>
+            <span>{{ pagoRef.fechaPago | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.metodoPago">Metodo Pago</span></dt>
+          <dd>
+            <span [jhiTranslate]="'reservadecanchasApp.MetodoPago.' + (pagoRef.metodoPago ?? 'null')">{{
+              {
+                null: '',
+                EFECTIVO: 'EFECTIVO',
+                TRANSFERENCIA: 'TRANSFERENCIA',
+                BILLETERA_DIGITAL: 'BILLETERA_DIGITAL',
+                TARJETA_CREDITO_VISA: 'TARJETA_CREDITO_VISA',
+              }[pagoRef.metodoPago ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.numOperacion">Num Operacion</span></dt>
+          <dd>
+            <span>{{ pagoRef.numOperacion }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.comprobanteUrl">Comprobante Url</span></dt>
+          <dd>
+            <span>{{ pagoRef.comprobanteUrl }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.estadoPago">Estado Pago</span></dt>
+          <dd>
+            <span [jhiTranslate]="'reservadecanchasApp.EstadoPago.' + (pagoRef.estadoPago ?? 'null')">{{
+              { null: '', PENDIENTE: 'PENDIENTE', PAGADO: 'PAGADO', RECHAZADO: 'RECHAZADO', REEMBOLSADO: 'REEMBOLSADO' }[
+                pagoRef.estadoPago ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ pagoRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ pagoRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ pagoRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ pagoRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.pago.reserva">Reserva</span></dt>
+          <dd>
+            @if (pago()!.reserva) {
+              <div>
+                <a [routerLink]="['/reserva', pago()!.reserva?.id, 'view']">{{ pagoRef.reserva?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="button" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/pago', pagoRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

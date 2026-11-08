@@ -1,0 +1,174 @@
+<div>
+  <h2 id="page-heading" data-cy="PagoHeading">
+    <span jhiTranslate="reservadecanchasApp.pago.home.title">Pagos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="reservadecanchasApp.pago.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-pago"
+        [routerLink]="['/pago/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="reservadecanchasApp.pago.home.createLabel">Crear nuevo Pago</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (pagos().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="reservadecanchasApp.pago.home.notFound">Ningún Pagos encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="monto">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.monto">Monto</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fechaPago">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.fechaPago">Fecha Pago</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metodoPago">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.metodoPago">Metodo Pago</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="numOperacion">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.numOperacion">Num Operacion</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="comprobanteUrl">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.comprobanteUrl">Comprobante Url</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="estadoPago">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.estadoPago">Estado Pago</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.createdBy">Created By</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.createdDate">Created Date</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.lastModifiedBy">Last Modified By</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.lastModifiedDate">Last Modified Date</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reserva.id">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.pago.reserva">Reserva</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (pago of pagos(); track trackId(pago)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/pago', pago.id, 'view']">{{ pago.id }}</a>
+              </td>
+              <td>{{ pago.monto }}</td>
+              <td>{{ pago.fechaPago | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'reservadecanchasApp.MetodoPago.' + (pago.metodoPago ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    EFECTIVO: 'EFECTIVO',
+                    TRANSFERENCIA: 'TRANSFERENCIA',
+                    BILLETERA_DIGITAL: 'BILLETERA_DIGITAL',
+                    TARJETA_CREDITO_VISA: 'TARJETA_CREDITO_VISA',
+                  }[pago.metodoPago ?? 'null']
+                }}
+              </td>
+              <td>{{ pago.numOperacion }}</td>
+              <td>{{ pago.comprobanteUrl }}</td>
+              <td [jhiTranslate]="'reservadecanchasApp.EstadoPago.' + (pago.estadoPago ?? 'null')">
+                {{
+                  { null: '', PENDIENTE: 'PENDIENTE', PAGADO: 'PAGADO', RECHAZADO: 'RECHAZADO', REEMBOLSADO: 'REEMBOLSADO' }[
+                    pago.estadoPago ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ pago.createdBy }}</td>
+              <td>{{ pago.createdDate | formatMediumDatetime }}</td>
+              <td>{{ pago.lastModifiedBy }}</td>
+              <td>{{ pago.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (pago.reserva) {
+                  <div>
+                    <a [routerLink]="['/reserva', pago.reserva.id, 'view']">{{ pago.reserva.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/pago', pago.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a [routerLink]="['/pago', pago.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="button" (click)="delete(pago)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

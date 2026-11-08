@@ -1,0 +1,11 @@
+{
+  "reservadecanchasApp": {
+    "EstadoReserva": {
+      "null": "",
+      "PENDIENTE": "PENDIENTE",
+      "CONFIRMADA": "CONFIRMADA",
+      "CANCELADA": "CANCELADA",
+      "FINALIZADA": "FINALIZADA"
+    }
+  }
+}

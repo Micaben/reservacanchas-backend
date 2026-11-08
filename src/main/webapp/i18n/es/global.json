@@ -7,7 +7,12 @@
       "entities": {
         "main": "Entidades",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "adminAuthority": "Authority",
+        "cliente": "Cliente",
+        "deporte": "Deporte",
+        "cancha": "Cancha",
+        "reserva": "Reserva",
+        "pago": "Pago"
       },
       "account": {
         "main": "Cuenta",

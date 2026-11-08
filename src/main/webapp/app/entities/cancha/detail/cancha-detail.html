@@ -1,0 +1,85 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (cancha(); as canchaRef) {
+      <div>
+        <h2 data-cy="canchaDetailsHeading"><span jhiTranslate="reservadecanchasApp.cancha.detail.title">Cancha</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ canchaRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.codigo">Codigo</span></dt>
+          <dd>
+            <span>{{ canchaRef.codigo }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.nombre">Nombre</span></dt>
+          <dd>
+            <span>{{ canchaRef.nombre }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.descripcion">Descripcion</span></dt>
+          <dd>
+            <span>{{ canchaRef.descripcion }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.precioHora">Precio Hora</span></dt>
+          <dd>
+            <span>{{ canchaRef.precioHora }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.capacidad">Capacidad</span></dt>
+          <dd>
+            <span>{{ canchaRef.capacidad }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.imagenUrl">Imagen Url</span></dt>
+          <dd>
+            <span>{{ canchaRef.imagenUrl }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.estado">Estado</span></dt>
+          <dd>
+            <span [jhiTranslate]="'reservadecanchasApp.EstadoCancha.' + (canchaRef.estado ?? 'null')">{{
+              { null: '', DISPONIBLE: 'DISPONIBLE', MANTENIMIENTO: 'MANTENIMIENTO', INACTIVA: 'INACTIVA' }[canchaRef.estado ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ canchaRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ canchaRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.lastModifiedBy">Last Modified By</span></dt>
+          <dd>
+            <span>{{ canchaRef.lastModifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ canchaRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cancha.deporte">Deporte</span></dt>
+          <dd>
+            @for (deporte of canchaRef.deportes; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/deporte', deporte.id, 'view']">{{ deporte?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="button" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/cancha', canchaRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

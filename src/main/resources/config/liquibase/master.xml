@@ -19,7 +19,16 @@
     <property name="timeType" value="time" dbms="oracle"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20261103005022_added_entity_Cliente.xml" relativeToChangelogFile="false"/>
+   
+    <include file="config/liquibase/changelog/20261103005024_added_entity_Deporte.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20261103005025_added_entity_Cancha.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20261103005026_added_entity_Reserva.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20261103005027_added_entity_Pago.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20261103005025_added_entity_constraints_Cancha.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20261103005026_added_entity_constraints_Reserva.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20261103005027_added_entity_constraints_Pago.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

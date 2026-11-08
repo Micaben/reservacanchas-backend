@@ -1,0 +1,68 @@
+{
+  "annotations": {
+    "changelogDate": "20261103005025"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "codigo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "nombre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "precioHora",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "capacidad",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "imagenUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "EstadoCancha",
+      "fieldValues": "DISPONIBLE,MANTENIMIENTO,INACTIVA"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Cancha",
+  "relationships": [
+    {
+      "otherEntityName": "deporte",
+      "otherEntityRelationshipName": "cancha",
+      "relationshipName": "deporte",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

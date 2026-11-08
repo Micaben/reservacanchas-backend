@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Cancha.
+    -->
+    <changeSet id="20261103005025-1" author="jhipster">
+        <createTable tableName="cancha">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="codigo" type="varchar(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_cancha__codigo" />
+            </column>
+            <column name="nombre" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="descripcion" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="precio_hora" type="decimal(21,2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="capacidad" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="imagen_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="estado" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="cancha" columnName="created_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="cancha" columnName="last_modified_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <changeSet id="20261103005025-1-relations" author="jhipster">
+
+        <createTable tableName="rel_cancha__deporte">
+            <column name="deporte_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cancha_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="cancha_id, deporte_id" tableName="rel_cancha__deporte"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20261103005025-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="../fake-data/cancha.csv"
+                  relativeToChangelogFile="true"
+                  separator=";"
+                  tableName="cancha"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="codigo" type="string"/>
+            <column name="nombre" type="string"/>
+            <column name="descripcion" type="string"/>
+            <column name="precio_hora" type="numeric"/>
+            <column name="capacidad" type="numeric"/>
+            <column name="imagen_url" type="string"/>
+            <column name="estado" type="string"/>
+            <column name="created_by" type="string"/>
+            <column name="created_date" type="date"/>
+            <column name="last_modified_by" type="string"/>
+            <column name="last_modified_date" type="date"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

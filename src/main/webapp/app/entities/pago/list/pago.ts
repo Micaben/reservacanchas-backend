@@ -1,0 +1,108 @@
+import { Component, effect, inject, signal, untracked } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Data, ParamMap, Router, RouterLink } from '@angular/router';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal';
+import { combineLatest, filter, map, tap } from 'rxjs';
+
+import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config';
+import { Alert, AlertError } from 'app/shared/alert';
+import { FormatMediumDatetimePipe } from 'app/shared/date';
+import { TranslateDirective } from 'app/shared/language';
+import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
+import { PagoDeleteDialog } from '../delete/pago-delete-dialog';
+import { IPago } from '../pago.model';
+import { PagoService } from '../service/pago.service';
+
+@Component({
+  selector: 'jhi-pago',
+  templateUrl: './pago.html',
+  imports: [RouterLink, FontAwesomeModule, AlertError, Alert, SortDirective, SortByDirective, TranslateDirective, FormatMediumDatetimePipe],
+})
+export class Pago {
+  readonly pagos = signal<IPago[]>([]);
+
+  sortState = sortStateSignal({});
+
+  readonly router = inject(Router);
+  protected readonly pagoService = inject(PagoService);
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  readonly isLoading = this.pagoService.pagosResource.isLoading;
+  protected readonly activatedRoute = inject(ActivatedRoute);
+  protected readonly activatedRouteState = toSignal(
+    combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
+      map(([queryParamMap, data]) => ({ queryParamMap, data })),
+    ),
+    { initialValue: { queryParamMap: this.activatedRoute.snapshot.queryParamMap, data: this.activatedRoute.snapshot.data } },
+  );
+  protected readonly sortService = inject(SortService);
+  protected modalService = inject(NgbModal);
+
+  constructor() {
+    effect(() => {
+      this.pagos.set(this.fillComponentAttributesFromResponseBody([...this.pagoService.pagos()]));
+    });
+    effect(() => {
+      const activatedRouteState = this.activatedRouteState();
+      untracked(() => {
+        // Only watch for route changes. Other signals should be ignored.
+        this.fillComponentAttributeFromRoute(activatedRouteState.queryParamMap, activatedRouteState.data);
+        this.load();
+      });
+    });
+  }
+
+  trackId = (item: IPago): number => this.pagoService.getPagoIdentifier(item);
+
+  delete(pago: IPago): void {
+    const modalRef = this.modalService.open(PagoDeleteDialog, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.pago = pago;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed
+      .pipe(
+        filter(reason => reason === ITEM_DELETED_EVENT),
+        tap(() => this.load()),
+      )
+      .subscribe();
+  }
+
+  load(): void {
+    this.queryBackend();
+  }
+
+  navigateToWithComponentValues(event: SortState): void {
+    this.handleNavigation(event);
+  }
+
+  protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
+    this.sortState.set(this.sortService.parseSortParam(params.get(SORT) ?? data[DEFAULT_SORT_DATA]));
+  }
+
+  protected refineData(data: IPago[]): IPago[] {
+    const { predicate, order } = this.sortState();
+    return predicate && order ? data.sort(this.sortService.startSort({ predicate, order })) : data;
+  }
+
+  protected fillComponentAttributesFromResponseBody(data: IPago[]): IPago[] {
+    return this.refineData(data);
+  }
+
+  protected queryBackend(): void {
+    const queryObject: any = {
+      sort: this.sortService.buildSortParam(this.sortState()),
+    };
+    this.pagoService.pagosParams.set(queryObject);
+  }
+
+  protected handleNavigation(sortState: SortState): void {
+    const queryParamsObj = {
+      sort: this.sortService.buildSortParam(sortState),
+    };
+
+    this.router.navigate(['./'], {
+      relativeTo: this.activatedRoute,
+      queryParams: queryParamsObj,
+    });
+  }
+}

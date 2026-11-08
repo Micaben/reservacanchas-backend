@@ -1,0 +1,11 @@
+{
+  "reservadecanchasApp": {
+    "MetodoPago": {
+      "null": "",
+      "EFECTIVO": "EFECTIVO",
+      "TRANSFERENCIA": "TRANSFERENCIA",
+      "BILLETERA_DIGITAL": "BILLETERA_DIGITAL",
+      "TARJETA_CREDITO_VISA": "TARJETA_CREDITO_VISA"
+    }
+  }
+}

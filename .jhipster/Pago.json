@@ -1,0 +1,62 @@
+{
+  "annotations": {
+    "changelogDate": "20261103005027"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "monto",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fechaPago",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "metodoPago",
+      "fieldType": "MetodoPago",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EFECTIVO,TRANSFERENCIA,BILLETERA_DIGITAL,TARJETA_CREDITO_VISA"
+    },
+    {
+      "fieldName": "numOperacion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "comprobanteUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estadoPago",
+      "fieldType": "EstadoPago",
+      "fieldValues": "PENDIENTE,PAGADO,RECHAZADO,REEMBOLSADO"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Pago",
+  "relationships": [
+    {
+      "otherEntityName": "reserva",
+      "relationshipName": "reserva",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

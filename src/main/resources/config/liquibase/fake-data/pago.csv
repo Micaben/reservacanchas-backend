@@ -1,0 +1,31 @@
+id;monto;fecha_pago;metodo_pago;num_operacion;comprobante_url;estado_pago;created_by;created_date;last_modified_by;last_modified_date
+1;20560.64;2026-11-02T21:27:42;BILLETERA_DIGITAL;bungalow tightly receptor;or;PENDIENTE;accomplished despite abnegate;2026-11-02T20:48:20;stabilise coordinated hmph;2026-11-02T23:28:32
+2;3228.85;2026-11-02T10:24:30;BILLETERA_DIGITAL;greatly gosh;golden snuggle mixture;RECHAZADO;object strong;2026-11-02T20:43:22;whereas around;2026-11-02T13:13:39
+3;17320.12;2026-11-02T10:28:28;TRANSFERENCIA;stratify even partially;coolly unibody;PAGADO;nor;2026-11-02T23:35:45;complicated eggplant;2026-11-02T08:33:13
+4;7535.85;2026-11-03T00:15:42;TARJETA_CREDITO_VISA;kowtow eek save;barracks prickly down;RECHAZADO;aw;2026-11-02T02:54:46;as indolent;2026-11-02T04:56:31
+5;19951.59;2026-11-02T06:31:37;EFECTIVO;access complete;though dead lavish;RECHAZADO;behind oof;2026-11-02T23:58:49;astride onto so;2026-11-02T15:38:11
+6;32312.45;2026-11-03T00:48:23;BILLETERA_DIGITAL;whoa yearly;ack eventually;PENDIENTE;fooey ha design;2026-11-02T04:12:29;modulo however sunny;2026-11-02T07:29:48
+7;26775.58;2026-11-02T02:18:14;EFECTIVO;frizzy;afore indeed;PAGADO;when and;2026-11-02T23:11:42;supposing bleakly;2026-11-02T15:31:01
+8;2881.03;2026-11-02T07:18:50;BILLETERA_DIGITAL;yawningly;meh pilot plan;RECHAZADO;daily considering;2026-11-02T16:31:49;wearily sad thrifty;2026-11-02T19:34:59
+9;27985.76;2026-11-02T00:51:25;EFECTIVO;upwardly recompense owlishly;duh gee;REEMBOLSADO;gah diligently casket;2026-11-02T04:32:55;unlike urgently punctual;2026-11-02T21:14:23
+10;3200.99;2026-11-02T17:52:19;TRANSFERENCIA;what like;suitcase around;PAGADO;unnecessarily rigidly beside;2026-11-02T03:48:35;gee wonderfully busily;2026-11-02T08:24:38
+11;20343.64;2026-11-03T00:19:46;TRANSFERENCIA;unethically quarrelsomely;penalise ah;RECHAZADO;gah so archaeology;2026-11-02T15:22:54;icebreaker;2026-11-02T17:25:43
+12;22920.79;2026-11-02T07:41:39;BILLETERA_DIGITAL;watery ill;boo;PENDIENTE;gah because;2026-11-02T17:59:06;gadzooks;2026-11-02T13:56:41
+13;15698.96;2026-11-02T04:38:03;BILLETERA_DIGITAL;instructor excitedly;encode gosh;PAGADO;jot likewise pulse;2026-11-02T19:02:07;antique recount certification;2026-11-02T23:10:18
+14;5701.65;2026-11-02T17:38:43;BILLETERA_DIGITAL;provided unscramble upwardly;responsible;RECHAZADO;lazily;2026-11-02T10:05:43;yippee boo;2026-11-02T20:50:52
+15;7240.36;2026-11-02T16:32:27;TRANSFERENCIA;archive meadow;shocked joyfully alive;REEMBOLSADO;carefully ouch tensely;2026-11-02T12:10:35;dependable valiantly yahoo;2026-11-02T01:39:49
+16;9909.81;2026-11-02T15:44:45;TARJETA_CREDITO_VISA;lawmaker outrun;for;PAGADO;thoroughly of;2026-11-02T22:12:09;foot bah our;2026-11-02T23:48:32
+17;5640.13;2026-11-03T00:08:23;TARJETA_CREDITO_VISA;via bathhouse;though;REEMBOLSADO;cook;2026-11-02T12:50:53;until loudly heroine;2026-11-02T15:09:08
+18;20994.47;2026-11-02T02:40:35;TARJETA_CREDITO_VISA;till phew um;under yet um;PAGADO;conclude so;2026-11-02T02:49:56;overcooked phooey incidentally;2026-11-02T07:12:44
+19;18787.5;2026-11-02T02:15:36;EFECTIVO;overload;during;PENDIENTE;um cinch aboard;2026-11-02T15:28:13;categorise kielbasa;2026-11-02T08:36:04
+20;9491.74;2026-11-02T02:57:23;TARJETA_CREDITO_VISA;impact abnormally;hydrocarbon joyously;RECHAZADO;formation instead;2026-11-02T10:52:35;boohoo descendant sleepily;2026-11-02T14:52:18
+21;10336.84;2026-11-02T01:53:22;EFECTIVO;other;that;PENDIENTE;restfully goodwill drat;2026-11-02T14:09:58;at seal;2026-11-02T15:27:08
+22;18402.34;2026-11-02T17:44:44;TRANSFERENCIA;cruelly inasmuch loudly;represent helpless er;PAGADO;bicycle even;2026-11-02T21:18:06;swiftly;2026-11-02T20:00:09
+23;9653.28;2026-11-02T20:18:50;BILLETERA_DIGITAL;wrongly;ectoderm painfully gosh;PENDIENTE;untidy;2026-11-02T16:39:12;yippee truly;2026-11-02T04:14:30
+24;18027.98;2026-11-03T00:44:35;TARJETA_CREDITO_VISA;kiddingly amidst scarification;underneath hourly;PENDIENTE;eek;2026-11-02T00:58:11;catalog;2026-11-03T00:43:19
+25;14901.14;2026-11-02T09:04:55;BILLETERA_DIGITAL;phooey;avaricious once;RECHAZADO;ouch twist;2026-11-02T07:11:27;pear who;2026-11-02T02:55:47
+26;23561.44;2026-11-02T09:31:05;TRANSFERENCIA;blah cosset;hefty incomplete;RECHAZADO;usually versus;2026-11-02T05:38:17;whenever nicely underneath;2026-11-02T06:24:56
+27;4076.38;2026-11-02T12:06:24;TARJETA_CREDITO_VISA;in wrongly phew;gad if;REEMBOLSADO;intently since elliptical;2026-11-02T18:44:12;smoothly till;2026-11-02T11:03:44
+28;5087.09;2026-11-02T05:57:59;TARJETA_CREDITO_VISA;bare;aside;RECHAZADO;seafood until mount;2026-11-02T23:41:23;covenant;2026-11-02T03:05:23
+29;2995;2026-11-02T19:29:25;BILLETERA_DIGITAL;aside oof;fortunately from inasmuch;PENDIENTE;whispered next juggernaut;2026-11-02T23:26:22;which whoa whoever;2026-11-02T06:44:32
+30;21637.23;2026-11-03T00:47:58;TRANSFERENCIA;consequently;receptor actually psst;PAGADO;efface besides indeed;2026-11-02T11:12:19;executor;2026-11-02T06:26:14
