@@ -29,6 +29,7 @@
     <include file="config/liquibase/changelog/20261103005025_added_entity_constraints_Cancha.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20261103005026_added_entity_constraints_Reserva.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20261103005027_added_entity_constraints_Pago.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20261103005022_added_entity_constraints_Cliente.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

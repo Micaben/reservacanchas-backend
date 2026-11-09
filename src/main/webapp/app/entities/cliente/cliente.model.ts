@@ -1,5 +1,7 @@
 import dayjs from 'dayjs/esm';
 
+import { IUser } from 'app/entities/user/user.model';
+
 export interface ICliente {
   id: number;
   nombres?: string | null;
@@ -13,6 +15,7 @@ export interface ICliente {
   createdDate?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
   lastModifiedDate?: dayjs.Dayjs | null;
+  user?: Pick<IUser, 'id' | 'login'> | null;
 }
 
 export type NewCliente = Omit<ICliente, 'id'> & { id: null };

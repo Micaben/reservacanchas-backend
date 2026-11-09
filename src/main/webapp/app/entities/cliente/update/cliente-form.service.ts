@@ -44,6 +44,7 @@ type ClienteFormGroupContent = {
   createdDate: FormControl<ClienteFormRawValue['createdDate']>;
   lastModifiedBy: FormControl<ClienteFormRawValue['lastModifiedBy']>;
   lastModifiedDate: FormControl<ClienteFormRawValue['lastModifiedDate']>;
+  user: FormControl<ClienteFormRawValue['user']>;
 };
 
 export type ClienteFormGroup = FormGroup<ClienteFormGroupContent>;
@@ -83,6 +84,7 @@ export class ClienteFormService {
       createdDate: new FormControl(clienteRawValue.createdDate),
       lastModifiedBy: new FormControl(clienteRawValue.lastModifiedBy),
       lastModifiedDate: new FormControl(clienteRawValue.lastModifiedDate),
+      user: new FormControl(clienteRawValue.user),
     });
   }
 

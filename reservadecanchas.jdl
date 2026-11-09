@@ -75,6 +75,7 @@ enum EstadoPago { PENDIENTE, PAGADO, RECHAZADO, REEMBOLSADO }
 
 relationship OneToOne {
   Pago{reserva} to Reserva
+  Cliente{user(login)} to User with builtInEntity
 }
 
 relationship ManyToMany {

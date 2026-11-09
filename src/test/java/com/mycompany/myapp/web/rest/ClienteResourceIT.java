@@ -4,21 +4,28 @@ import static com.mycompany.myapp.domain.ClienteAsserts.*;
 import static com.mycompany.myapp.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.Cliente;
 import com.mycompany.myapp.repository.ClienteRepository;
+import com.mycompany.myapp.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +36,7 @@ import tools.jackson.databind.ObjectMapper;
  * Integration tests for the {@link ClienteResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class ClienteResourceIT {
@@ -77,6 +85,12 @@ class ClienteResourceIT {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Mock
+    private ClienteRepository clienteRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -269,6 +283,23 @@ class ClienteResourceIT {
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
             .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllClientesWithEagerRelationshipsIsEnabled() throws Exception {
+        when(clienteRepositoryMock.findAllWithEagerRelationships()).thenReturn(new ArrayList<>());
+
+        restClienteMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(clienteRepositoryMock, times(1)).findAllWithEagerRelationships();
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllClientesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(clienteRepositoryMock.findAllWithEagerRelationships()).thenReturn(new ArrayList<>());
+
+        restClienteMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(clienteRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test

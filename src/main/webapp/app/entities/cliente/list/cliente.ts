@@ -90,6 +90,7 @@ export class Cliente {
 
   protected queryBackend(): void {
     const queryObject: any = {
+      eagerload: true,
       sort: this.sortService.buildSortParam(this.sortState()),
     };
     this.clienteService.clientesParams.set(queryObject);

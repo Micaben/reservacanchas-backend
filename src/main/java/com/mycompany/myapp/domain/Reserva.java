@@ -67,6 +67,7 @@ public class Reserva implements Serializable {
     private Instant lastModifiedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)

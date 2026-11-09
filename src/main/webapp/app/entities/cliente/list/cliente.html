@@ -105,6 +105,12 @@
                 <fa-icon class="p-1" icon="sort" />
               </div>
             </th>
+            <th scope="col" jhiSortBy="user.login">
+              <div class="d-flex">
+                <span jhiTranslate="reservadecanchasApp.cliente.user">User</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -125,6 +131,9 @@
               <td>{{ cliente.createdDate | formatMediumDatetime }}</td>
               <td>{{ cliente.lastModifiedBy }}</td>
               <td>{{ cliente.lastModifiedDate | formatMediumDatetime }}</td>
+              <td>
+                {{ cliente.user?.login }}
+              </td>
               <td class="text-end">
                 <div class="btn-group">
                   <a [routerLink]="['/cliente', cliente.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

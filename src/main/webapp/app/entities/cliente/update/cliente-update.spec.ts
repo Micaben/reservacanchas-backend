@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { HttpResponse } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { Subject, from, of } from 'rxjs';
 
+import { UserService } from 'app/entities/user/service/user.service';
+import { IUser } from 'app/entities/user/user.model';
 import { ICliente } from '../cliente.model';
 import { ClienteService } from '../service/cliente.service';
 
@@ -18,6 +21,7 @@ describe('Cliente Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let clienteFormService: ClienteFormService;
   let clienteService: ClienteService;
+  let userService: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -37,17 +41,43 @@ describe('Cliente Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     clienteFormService = TestBed.inject(ClienteFormService);
     clienteService = TestBed.inject(ClienteService);
+    userService = TestBed.inject(UserService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('should update editForm', () => {
+    it('should call User query and add missing value', () => {
       const cliente: ICliente = { id: 20795 };
+      const user: IUser = { id: 3944 };
+      cliente.user = user;
+
+      const userCollection: IUser[] = [{ id: 3944 }];
+      vi.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
+      const additionalUsers = [user];
+      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
+      vi.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ cliente });
       comp.ngOnInit();
 
+      expect(userService.query).toHaveBeenCalled();
+      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(
+        userCollection,
+        ...additionalUsers.map(i => expect.objectContaining(i) as typeof i),
+      );
+      expect(comp.usersSharedCollection()).toEqual(expectedCollection);
+    });
+
+    it('should update editForm', () => {
+      const cliente: ICliente = { id: 20795 };
+      const user: IUser = { id: 3944 };
+      cliente.user = user;
+
+      activatedRoute.data = of({ cliente });
+      comp.ngOnInit();
+
+      expect(comp.usersSharedCollection()).toContainEqual(user);
       expect(comp.cliente).toEqual(cliente);
     });
   });
@@ -117,6 +147,18 @@ describe('Cliente Management Update Component', () => {
       expect(clienteService.update).toHaveBeenCalled();
       expect(comp.isSaving()).toEqual(false);
       expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Compare relationships', () => {
+    describe('compareUser', () => {
+      it('should forward to userService', () => {
+        const entity = { id: 3944 };
+        const entity2 = { id: 6275 };
+        vi.spyOn(userService, 'compareUser');
+        comp.compareUser(entity, entity2);
+        expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
+      });
     });
   });
 });

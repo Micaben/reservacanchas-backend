@@ -59,6 +59,10 @@
           <dd>
             <span>{{ clienteRef.lastModifiedDate | formatMediumDatetime }}</span>
           </dd>
+          <dt><span jhiTranslate="reservadecanchasApp.cliente.user">User</span></dt>
+          <dd>
+            <span>{{ clienteRef.user?.login }}</span>
+          </dd>
         </dl>
 
         <button type="button" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
